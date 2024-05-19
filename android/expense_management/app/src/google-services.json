@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "468458846088",
+    "project_id": "expense-management-ed5cb",
+    "storage_bucket": "expense-management-ed5cb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:468458846088:android:d17756a8a03c2734f66c3d",
+        "android_client_info": {
+          "package_name": "com.example.expense_management"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWDTz36NcXUcDRz3aq-x8xpf3PV4z2rkU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
