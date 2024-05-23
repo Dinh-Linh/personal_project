@@ -1,0 +1,587 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.MonthlyReportActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/lightWhite"
+        android:gravity="center"
+        android:padding="12dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/open_san"
+            android:text="Báo cáo thu chi"
+            android:textSize="16dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Start date: "/>
+            <TextView
+                android:id="@+id/startDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="dd/MM/yyy"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="End date: "/>
+            <TextView
+                android:id="@+id/endDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="dd/MM/yyy"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnConfirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Confirm"
+        android:background="@drawable/item_list_folder"
+        android:backgroundTint="@color/green"
+        android:layout_margin="12dp"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:textSize="16sp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/item_list_folder"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:fontFamily="@font/open_san"
+                android:text="Chi tiêu: "
+                android:textSize="16sp"
+                android:layout_weight="1"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/totalExpense"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/open_san"
+                android:text="0 VND"
+                android:textColor="#F41414"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="8dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/item_list_folder"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:fontFamily="@font/open_san"
+                android:text="Thu nhập: "
+                android:layout_weight="1"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/totalRevenue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/open_san"
+                android:text="0 VND"
+                android:textColor="#33A59A"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/item_list_folder"
+        android:layout_margin="12dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:fontFamily="@font/open_san"
+            android:text="Tổng thu chi: "
+            android:layout_weight="1"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/open_san"
+            android:text="0 VND"
+            android:textColor="#03A9F4"/>
+    </LinearLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scrollbars="none">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical">
+            <LinearLayout
+                android:id="@+id/food"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:background="@drawable/item_list_folder"
+                android:layout_margin = "12dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/food"
+                    android:layout_marginEnd="12dp"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Ăn uống"
+                    android:fontFamily="@font/open_san"
+                    android:layout_weight="1"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/tienAn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_san"
+                    android:text="0 VND"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/shop"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:background="@drawable/item_list_folder"
+                android:layout_margin = "12dp"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/shop"
+                    android:layout_marginEnd="12dp"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Chi tiêu hàng"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/open_san"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/tienTieuVat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_san"
+                    android:text="0 VND"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/clothes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:background="@drawable/item_list_folder"
+                android:layout_margin = "12dp"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/clothes"
+                    android:layout_marginEnd="12dp"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Quần áo"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/open_san"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/tienQuanAo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_san"
+                    android:text="0 VND"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/relationship"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:background="@drawable/item_list_folder"
+                android:layout_margin = "12dp"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/realtionship"
+                    android:layout_marginEnd="12dp"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Phí giao lưu"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/open_san"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/tienGiaoLuu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_san"
+                    android:text="0 VND"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/health"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:background="@drawable/item_list_folder"
+                android:layout_margin = "12dp"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/health"
+                    android:layout_marginEnd="12dp"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Sức khoẻ"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/open_san"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/tienSucKhoe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_san"
+                    android:text="0 VND"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/study"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:background="@drawable/item_list_folder"
+                android:layout_margin = "12dp"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/studying"
+                    android:layout_marginEnd="12dp"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Học tập"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/open_san"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/tienHocTap"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_san"
+                    android:text="0 VND"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/travel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:background="@drawable/item_list_folder"
+                android:layout_margin = "12dp"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/travel"
+                    android:layout_marginEnd="12dp"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Đi lại"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/open_san"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/tienDiLai"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_san"
+                    android:text="0 VND"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/call"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:background="@drawable/item_list_folder"
+                android:layout_margin = "12dp"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/phone"
+                    android:layout_marginEnd="12dp"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Liên lạc"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/open_san"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/tienLienLac"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_san"
+                    android:text="0 VND"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/house"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:background="@drawable/item_list_folder"
+                android:layout_margin = "12dp"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/home_svgrepo_com"
+                    android:layout_marginEnd="12dp"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Nhà cửa"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/open_san"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/tienNhaCua"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_san"
+                    android:text="0 VND"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/salary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:background="@drawable/item_list_folder"
+                android:layout_margin = "12dp"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/pay"
+                    android:layout_marginEnd="12dp"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Tiền lương"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/open_san"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/tienLuong"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_san"
+                    android:text="0VND"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/allowance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:background="@drawable/item_list_folder"
+                android:layout_margin = "12dp"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/money"
+                    android:layout_marginEnd="12dp"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Tiền phụ cấp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/open_san"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/tienPhuCap"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_san"
+                    android:text="0 VND"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/bonus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:background="@drawable/item_list_folder"
+                android:layout_margin = "12dp"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/star"
+                    android:layout_marginEnd="12dp"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Tiền thưởng"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/open_san"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/tienThuong"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_san"
+                    android:text="0 VND"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/secondIncome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:background="@drawable/item_list_folder"
+                android:layout_margin = "12dp"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/money_bag2"
+                    android:layout_marginEnd="12dp"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Thu nhập phụ"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/open_san"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/tienPhu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_san"
+                    android:text="0 VND"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/invest"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:background="@drawable/item_list_folder"
+                android:layout_margin = "12dp"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/invest"
+                    android:layout_marginEnd="12dp"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Đầu tư"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/open_san"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/tienDauTu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_san"
+                    android:text="0 VND"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/tempIncome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:background="@drawable/item_list_folder"
+                android:layout_margin = "12dp"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/bag_cash_currency"
+                    android:layout_marginEnd="12dp"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Thu nhập tạm"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/open_san"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/tienTam"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_san"
+                    android:text="0 VND"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

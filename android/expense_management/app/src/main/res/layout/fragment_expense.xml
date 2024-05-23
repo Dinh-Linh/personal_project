@@ -91,6 +91,7 @@
             android:textStyle="bold"
             android:textSize="18sp"/>
         <TextView
+            android:id="@+id/category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Text"
@@ -98,184 +99,198 @@
             android:textSize="18sp"/>
     </LinearLayout>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:scrollbars="none">
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="90dp"
-            android:padding="10dp"
-            android:gravity="center"
-            android:background="@drawable/item_list_folder"
-            android:layout_margin="12dp"
-            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:orientation="vertical">
-            <ImageView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/food"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/money_bag"/>
-            <TextView
-                android:layout_width="wrap_content"
+                android:padding="10dp"
+                android:background="@drawable/item_list_folder"
+                android:layout_margin = "12dp"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/food"
+                    android:layout_marginEnd="12dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Ăn uống"
+                    android:fontFamily="@font/open_san"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/shop"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Ăn uống"/>
+                android:padding="10dp"
+                android:background="@drawable/item_list_folder"
+                android:layout_margin = "12dp"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/shop"
+                    android:layout_marginEnd="12dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Chi tiêu hàng"
+                    android:fontFamily="@font/open_san"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/clothes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:background="@drawable/item_list_folder"
+                android:layout_margin = "12dp"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/clothes"
+                    android:layout_marginEnd="12dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Quần áo"
+                    android:fontFamily="@font/open_san"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/relationship"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:background="@drawable/item_list_folder"
+                android:layout_margin = "12dp"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/realtionship"
+                    android:layout_marginEnd="12dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Phí giao lưu"
+                    android:fontFamily="@font/open_san"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/health"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:background="@drawable/item_list_folder"
+                android:layout_margin = "12dp"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/health"
+                    android:layout_marginEnd="12dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Sức khoẻ"
+                    android:fontFamily="@font/open_san"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/study"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:background="@drawable/item_list_folder"
+                android:layout_margin = "12dp"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/studying"
+                    android:layout_marginEnd="12dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Học tập"
+                    android:fontFamily="@font/open_san"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/travel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:background="@drawable/item_list_folder"
+                android:layout_margin = "12dp"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/travel"
+                    android:layout_marginEnd="12dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Đi lại"
+                    android:fontFamily="@font/open_san"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/call"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:background="@drawable/item_list_folder"
+                android:layout_margin = "12dp"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/phone"
+                    android:layout_marginEnd="12dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Liên lạc"
+                    android:fontFamily="@font/open_san"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/house"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:background="@drawable/item_list_folder"
+                android:layout_margin = "12dp"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/home_svgrepo_com"
+                    android:layout_marginEnd="12dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Nhà cửa"
+                    android:fontFamily="@font/open_san"
+                    android:textStyle="bold"/>
+            </LinearLayout>
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="90dp"
-            android:padding="10dp"
-            android:gravity="center"
-            android:background="@drawable/item_list_folder"
-            android:layout_weight="1"
-            android:layout_marginTop="12dp"
-            android:layout_marginRight="12dp"
-            android:orientation="vertical">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/money_bag"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Chi tiêu hàng"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="90dp"
-            android:padding="10dp"
-            android:gravity="center"
-            android:background="@drawable/item_list_folder"
-            android:layout_weight="1"
-            android:layout_marginTop="12dp"
-            android:orientation="vertical">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/money_bag"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Khoản thu chi"/>
-        </LinearLayout>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="90dp"
-            android:padding="10dp"
-            android:gravity="center"
-            android:background="@drawable/item_list_folder"
-            android:layout_margin="12dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/money_bag"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Khoản thu chi"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="90dp"
-            android:padding="10dp"
-            android:gravity="center"
-            android:background="@drawable/item_list_folder"
-            android:layout_weight="1"
-            android:layout_marginTop="12dp"
-            android:layout_marginRight="12dp"
-            android:orientation="vertical">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/money_bag"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Khoản thu chi"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="90dp"
-            android:padding="10dp"
-            android:gravity="center"
-            android:background="@drawable/item_list_folder"
-            android:layout_weight="1"
-            android:layout_marginTop="12dp"
-            android:orientation="vertical">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/money_bag"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Khoản thu chi"/>
-        </LinearLayout>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="90dp"
-            android:padding="10dp"
-            android:gravity="center"
-            android:background="@drawable/item_list_folder"
-            android:layout_margin="12dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/money_bag"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Khoản thu chi"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="90dp"
-            android:padding="10dp"
-            android:gravity="center"
-            android:background="@drawable/item_list_folder"
-            android:layout_weight="1"
-            android:layout_marginTop="12dp"
-            android:layout_marginRight="12dp"
-            android:orientation="vertical">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/money_bag"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Khoản thu chi"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="90dp"
-            android:padding="10dp"
-            android:gravity="center"
-            android:background="@drawable/item_list_folder"
-            android:layout_weight="1"
-            android:layout_marginTop="12dp"
-            android:orientation="vertical">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/money_bag"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Khoản thu chi"/>
-        </LinearLayout>
+    </ScrollView>
 
-    </LinearLayout>
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/addExpense"
         android:layout_width="match_parent"

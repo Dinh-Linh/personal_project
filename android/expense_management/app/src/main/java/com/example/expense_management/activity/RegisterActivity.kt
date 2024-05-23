@@ -33,7 +33,24 @@ class RegisterActivity : AppCompatActivity() {
                             if (task.isSuccessful) {
                                 Toast.makeText(this, "Creat account Successful", Toast.LENGTH_LONG)
                                     .show()
-                                //println("Hello world")
+                                //task.result.user?.uid
+                                val newUser = User(
+                                    name = binding.username.text.toString()
+                                )
+                                task.result.user?.let { it1 ->
+                                    db.collection("users").document(it1.uid).set(newUser)
+                                        .addOnSuccessListener {
+                                            Toast.makeText(this, "Successful", Toast.LENGTH_LONG)
+                                                .show()
+                                        }
+                                        .addOnFailureListener { exception ->
+                                            Toast.makeText(
+                                                this,
+                                                exception.message,
+                                                Toast.LENGTH_LONG
+                                            ).show()
+                                        }
+                                }
                                 startActivity(Intent(this, LoginActivity::class.java))
                                 finish()
                             } else {
@@ -46,20 +63,22 @@ class RegisterActivity : AppCompatActivity() {
                         }
                 }
             }
-            auth.currentUser.let { user ->
-                val newUser = User(
-                    name = binding.username.text.toString()
-                )
-                db.collection("users")
-                    .document()
-                    .set(newUser)
-                    .addOnSuccessListener {
-                        Toast.makeText(this, "Successful", Toast.LENGTH_LONG).show()
-                    }
-                    .addOnFailureListener { exception ->
-                        Toast.makeText(this, exception.message, Toast.LENGTH_LONG).show()
-                    }
-            }
+//            auth.currentUser.let { user ->
+//                val newUser = User(
+//                    name = binding.username.text.toString()
+//                )
+//                if (user != null) {
+//                    db.collection("users")
+//                        .document(user.uid)
+//                        .set(newUser)
+//                        .addOnSuccessListener {
+//                            Toast.makeText(this, "Successful", Toast.LENGTH_LONG).show()
+//                        }
+//                        .addOnFailureListener { exception ->
+//                            Toast.makeText(this, exception.message, Toast.LENGTH_LONG).show()
+//                        }
+//                }
+//            }
         }
     }
 }

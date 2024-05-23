@@ -65,7 +65,7 @@
             android:textStyle="bold"
             android:text="Tiền thu: "/>
         <EditText
-            android:id="@+id/tienChi"
+            android:id="@+id/tienThu"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -91,6 +91,7 @@
             android:textStyle="bold"
             android:textSize="18sp"/>
         <TextView
+            android:id="@+id/category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Text"
@@ -99,8 +100,10 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:baselineAligned="false">
         <LinearLayout
+            android:id="@+id/salary"
             android:layout_width="wrap_content"
             android:layout_height="90dp"
             android:padding="10dp"
@@ -112,13 +115,14 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/money_bag"/>
+                android:src="@drawable/pay"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tiền lương"/>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/allowance"
             android:layout_width="wrap_content"
             android:layout_height="90dp"
             android:padding="10dp"
@@ -131,13 +135,14 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/money_bag"/>
+                android:src="@drawable/money"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tiền phụ cấp"/>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/bonus"
             android:layout_width="wrap_content"
             android:layout_height="90dp"
             android:padding="10dp"
@@ -149,7 +154,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/money_bag"/>
+                android:src="@drawable/star"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -160,6 +165,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout
+            android:id="@+id/secondIncome"
             android:layout_width="wrap_content"
             android:layout_height="90dp"
             android:padding="10dp"
@@ -170,13 +176,14 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/money_bag"/>
+                android:src="@drawable/money_bag2"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Thu nhập phụ"/>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/invest"
             android:layout_width="wrap_content"
             android:layout_height="90dp"
             android:padding="10dp"
@@ -189,13 +196,14 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/money_bag"/>
+                android:src="@drawable/invest"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Đầu tư"/>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/tempIncome"
             android:layout_width="wrap_content"
             android:layout_height="90dp"
             android:padding="10dp"
@@ -207,7 +215,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/money_bag"/>
+                android:src="@drawable/bag_cash_currency"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -215,7 +223,7 @@
         </LinearLayout>
     </LinearLayout>
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/addExpense"
+        android:id="@+id/addRevenue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/corner"
