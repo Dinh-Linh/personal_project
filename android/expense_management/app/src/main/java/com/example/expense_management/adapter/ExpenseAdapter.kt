@@ -27,7 +27,7 @@ class ExpenseAdapter(val expenseList: MutableList<Expense>) :
 
     override fun onBindViewHolder(holder: ExpenseViewHolder, position: Int) {
         holder.title.text = expenseList[position].title
-        holder.date.text = expenseList[position].date
+        holder.date.text = expenseList[position].date.toString()
         holder.money.text = expenseList[position].price.toString()
     }
 }

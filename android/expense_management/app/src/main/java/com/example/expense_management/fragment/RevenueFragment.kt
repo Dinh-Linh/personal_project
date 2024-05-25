@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.example.expense_management.data.Revenue
 import com.example.expense_management.databinding.FragmentRevenueBinding
+import com.example.expense_management.func.ConvertToTimestamp
 import com.example.expense_management.func.DateUtils
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
@@ -22,7 +23,9 @@ class RevenueFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val dateUtils = DateUtils(requireContext())
-        bindingFm.date.text = dateUtils.getCurrentDate()
+        var dateString = bindingFm.date.text.toString()
+        dateString = dateUtils.getCurrentDate()
+        bindingFm.date.text = dateString
         bindingFm.prev.setOnClickListener {
             bindingFm.date.text = dateUtils.getPreDate()
         }
@@ -32,7 +35,8 @@ class RevenueFragment : Fragment() {
         bindingFm.date.setOnClickListener {
             dateUtils.showDatePickerDialog { selectedDate ->
                 Toast.makeText(requireContext(), "successful", Toast.LENGTH_LONG).show()
-                bindingFm.date.text = selectedDate
+                dateString = selectedDate
+                bindingFm.date.text = dateString
             }
         }
 
@@ -62,11 +66,12 @@ class RevenueFragment : Fragment() {
         }
 
         bindingFm.addRevenue.setOnClickListener{
+            val dateTimestamp = ConvertToTimestamp().convertToTimestamp(dateString)
             auth.currentUser.let { revenue ->
                 val newRevenue = Revenue(
                     title = bindingFm.category.text.toString(),
                     content = bindingFm.note.text.toString(),
-                    date = bindingFm.date.text.toString(),
+                    date = dateTimestamp,
                     price = bindingFm.tienThu.text.toString().toDouble()
                 )
                 db.collection("total_revenue").document().set(newRevenue).addOnSuccessListener {

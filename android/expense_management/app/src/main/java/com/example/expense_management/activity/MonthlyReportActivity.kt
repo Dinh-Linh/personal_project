@@ -6,8 +6,10 @@ import android.widget.Toast
 import com.example.expense_management.R
 import com.example.expense_management.data.Revenue
 import com.example.expense_management.databinding.ActivityMonthlyReportBinding
+import com.example.expense_management.func.ConvertToTimestamp
 import com.example.expense_management.func.DateUtils
 import com.google.firebase.Firebase
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.Filter
 import com.google.firebase.firestore.firestore
@@ -22,37 +24,44 @@ class MonthlyReportActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         //Set date
-        val startDate = binding.startDate.text.toString()
-        val endDate = binding.endDate.text.toString()
+        var startDate = binding.startDate.text.toString()
+        var endDate = binding.endDate.text.toString()
         val dateUtils = DateUtils(this@MonthlyReportActivity)
         binding.startDate.text = dateUtils.getCurrentDate()
         binding.startDate.setOnClickListener {
             dateUtils.showDatePickerDialog { selectedDate ->
-                binding.startDate.text = selectedDate
+                startDate = selectedDate
+                binding.startDate.text = startDate
             }
         }
         binding.endDate.text = dateUtils.getCurrentDate()
         binding.endDate.setOnClickListener {
             dateUtils.showDatePickerDialog { selectedDate ->
-                binding.endDate.text = selectedDate
+                endDate = selectedDate
+                binding.endDate.text = endDate
             }
         }
 
-        db.collection("total_revenue").whereLessThan("date", endDate)
-            .whereGreaterThan("date", startDate).get().addOnSuccessListener { documents ->
-                val listRevenue = mutableListOf<Revenue>()
-                var totalRevenue = 0.0
-                for (document in documents) {
-                    val revenue = document.toObject<Revenue>()
-                    listRevenue.add(revenue)
-                    totalRevenue += revenue.price!!
-                    binding.totalRevenue.text = totalRevenue.toString() + " VND"
-                    //println(totalRevenue)
-                }
-            }
-            .addOnFailureListener { exception ->
-                Toast.makeText(this, exception.message, Toast.LENGTH_LONG).show()
-            }
+
+        /*   if (endDateTimestamp != null && startDateTimestamp != null) {
+               db.collection("total_revenue").whereLessThan("date", endDateTimestamp)
+                   .whereGreaterThan("date", startDateTimestamp).get()
+                   .addOnSuccessListener { documents ->
+                       val listRevenue = mutableListOf<Revenue>()
+                       var totalRevenue = 0.0
+                       for (document in documents) {
+                           val revenue = document.toObject<Revenue>()
+                           listRevenue.add(revenue)
+                           totalRevenue += revenue.price!!
+                           binding.totalRevenue.text = totalRevenue.toString() + " VND"
+                           //println(totalRevenue)
+                       }
+                   }
+                   .addOnFailureListener { exception ->
+                       Toast.makeText(this, exception.message, Toast.LENGTH_LONG).show()
+                   }
+
+           }*/
         db.collection("total_revenue").whereEqualTo("title", "Tiền lương").get()
             .addOnSuccessListener { documents ->
                 val list = mutableListOf<Revenue>()
@@ -64,8 +73,16 @@ class MonthlyReportActivity : AppCompatActivity() {
                 }
             }
         binding.btnConfirm.setOnClickListener {
-            totalPriceRevenue("Tiền lương", startDate, endDate) { totalPrice ->
-                binding.tienLuong.text = "$totalPrice VND"
+            val startDateTimestamp = ConvertToTimestamp().convertToTimestamp(startDate)
+            val endDateTimestamp = ConvertToTimestamp().convertToTimestamp(endDate)
+            if (startDateTimestamp != null && endDateTimestamp != null) {
+                totalPriceRevenue(
+                    "Tiền lương",
+                    startDateTimestamp,
+                    endDateTimestamp
+                ) { totalPrice ->
+                    binding.tienLuong.text = "$totalPrice VND"
+                }
             }
         }
     }
@@ -73,8 +90,8 @@ class MonthlyReportActivity : AppCompatActivity() {
     //Total money func
     fun totalPriceRevenue(
         vlue: String,
-        startDate: String,
-        endDate: String,
+        startDate: Timestamp,
+        endDate: Timestamp,
         callback: (Double) -> Unit
     ) {
         var totalPrice = 0.0

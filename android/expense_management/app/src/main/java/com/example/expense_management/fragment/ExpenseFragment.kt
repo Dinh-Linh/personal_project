@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.example.expense_management.data.Expense
-import com.example.expense_management.data.Revenue
 import com.example.expense_management.databinding.FragmentExpenseBinding
+import com.example.expense_management.func.ConvertToTimestamp
 import com.example.expense_management.func.DateUtils
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
@@ -23,7 +23,9 @@ class ExpenseFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val dateUtils = DateUtils(requireContext())
-        bindingFm.date.text = dateUtils.getCurrentDate()
+        var dateString = bindingFm.date.text.toString()
+        dateString = dateUtils.getCurrentDate()
+        bindingFm.date.text = dateString
         bindingFm.prev.setOnClickListener{
             bindingFm.date.text = dateUtils.getPreDate()
         }
@@ -33,9 +35,11 @@ class ExpenseFragment : Fragment() {
         bindingFm.date.setOnClickListener{
             dateUtils.showDatePickerDialog {selectedDate ->
                 Toast.makeText(requireContext(), "successful", Toast.LENGTH_LONG).show()
-                bindingFm.date.text = selectedDate
+                dateString = selectedDate
+                bindingFm.date.text = dateString
             }
         }
+
 
         bindingFm.food.setOnClickListener{
             bindingFm.category.text = "Ăn uống"
@@ -67,11 +71,12 @@ class ExpenseFragment : Fragment() {
 
 
         bindingFm.addExpense.setOnClickListener{
+            val dateTimestamp = ConvertToTimestamp().convertToTimestamp(dateString)
             auth.currentUser.let { revenue ->
                 val newExpense = Expense(
                     title = bindingFm.category.text.toString(),
                     content = bindingFm.note.text.toString(),
-                    date = bindingFm.date.text.toString(),
+                    date = dateTimestamp,
                     price = bindingFm.tienChi.text.toString().toDouble()
                 )
                 db.collection("total_expense").document().set(newExpense).addOnSuccessListener {
