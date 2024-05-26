@@ -202,11 +202,11 @@ class MonthlyReportActivity : AppCompatActivity() {
             }
         }
 
-        binding.tienLuong.setOnClickListener{
+        binding.tienLuong.setOnClickListener {
             db.collection("total_revenue").whereEqualTo("title", "Tiền lương").get()
-                .addOnSuccessListener {documents ->
+                .addOnSuccessListener { documents ->
                     val list = mutableListOf<Revenue>()
-                    for (document in documents){
+                    for (document in documents) {
                         val revenue = document.toObject<Revenue>()
                         list.add(revenue)
                     }
