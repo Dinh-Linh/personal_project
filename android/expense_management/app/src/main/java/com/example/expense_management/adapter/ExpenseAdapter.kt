@@ -11,7 +11,7 @@ import com.example.expense_management.data.Expense
 class ExpenseAdapter(val expenseList: MutableList<Expense>) :
     RecyclerView.Adapter<ExpenseAdapter.ExpenseViewHolder>() {
     class ExpenseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val title = itemView.findViewById<TextView>(R.id.title)
+        val title = itemView.findViewById<TextView>(R.id.content)
         val date = itemView.findViewById<TextView>(R.id.date)
         val money = itemView.findViewById<TextView>(R.id.money)
     }
