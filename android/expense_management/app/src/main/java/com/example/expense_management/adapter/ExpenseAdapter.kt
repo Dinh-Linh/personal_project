@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.expense_management.R
 import com.example.expense_management.data.Expense
 
-class ExpenseAdapter(val expenseList: MutableList<Expense>) :
+class ExpenseAdapter(val expenseList: List<Expense>) :
     RecyclerView.Adapter<ExpenseAdapter.ExpenseViewHolder>() {
     class ExpenseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val title = itemView.findViewById<TextView>(R.id.content)

@@ -1,7 +1,9 @@
 package com.example.expense_management.activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import com.example.expense_management.R
 import com.example.expense_management.data.Expense
@@ -212,6 +214,14 @@ class MonthlyReportActivity : AppCompatActivity() {
                     }
                 }
         }
+        binding.tienAn.setOnClickListener {
+            onCategoryClick("Ăn uống", startDate, endDate)
+            startActivity(Intent(this, CatalogDetailsActivity::class.java))
+        }
+
+        binding.tienQuanAo.setOnClickListener {
+            onCategoryClick("Quần áo", startDate, endDate)
+        }
     }
 
     //Total money func
@@ -255,6 +265,46 @@ class MonthlyReportActivity : AppCompatActivity() {
                     totalPrice += expense.price!!
                 }
                 callback(totalPrice)
+            }
+            .addOnFailureListener { exception ->
+                Toast.makeText(this, exception.message, Toast.LENGTH_LONG).show()
+            }
+    }
+
+    // Thay thế "Tiền ăn" bằng tên của mục được chọn
+    fun onCategoryClick(categoryName: String, startDate: String, endDate: String) {
+        val startDateTimestamp = ConvertToTimestamp().convertToTimestamp(startDate)
+        val endDateTimestamp = ConvertToTimestamp().convertToTimestamp(endDate)
+
+        if (startDateTimestamp != null && endDateTimestamp != null) {
+            val intent = Intent(this, CatalogDetailsActivity::class.java)
+            intent.putExtra("category_name", categoryName)
+            intent.putExtra("start_date", startDateTimestamp)
+            intent.putExtra("end_date", endDateTimestamp)
+            startActivity(intent)
+        }
+
+    }
+
+    fun fetchData(
+        collection: String,
+        category: String,
+        startDate: Timestamp,
+        endDate: Timestamp,
+        callback: (List<Expense>) -> Unit
+    ) {
+        db.collection(collection)
+            .whereEqualTo("title", category)
+            .whereGreaterThan("date", startDate)
+            .whereLessThan("date", endDate)
+            .get()
+            .addOnSuccessListener { documents ->
+                val list = mutableListOf<Expense>()
+                for (document in documents) {
+                    val expense = document.toObject<Expense>()
+                    list.add(expense)
+                }
+                callback(list)
             }
             .addOnFailureListener { exception ->
                 Toast.makeText(this, exception.message, Toast.LENGTH_LONG).show()
