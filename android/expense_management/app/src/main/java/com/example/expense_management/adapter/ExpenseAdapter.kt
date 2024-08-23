@@ -10,15 +10,18 @@ import com.example.expense_management.data.Expense
 
 class ExpenseAdapter(val expenseList: List<Expense>) :
     RecyclerView.Adapter<ExpenseAdapter.ExpenseViewHolder>() {
+    val onClick: ((Expense) -> Unit)? = null
+
     class ExpenseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val title = itemView.findViewById<TextView>(R.id.content)
         val date = itemView.findViewById<TextView>(R.id.date)
         val money = itemView.findViewById<TextView>(R.id.money)
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExpenseViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_expense, parent, false)
-        return  ExpenseViewHolder(view)
+        return ExpenseViewHolder(view)
     }
 
     override fun getItemCount(): Int {
@@ -29,5 +32,6 @@ class ExpenseAdapter(val expenseList: List<Expense>) :
         holder.title.text = expenseList[position].title
         holder.date.text = expenseList[position].date.toString()
         holder.money.text = expenseList[position].price.toString()
+        onClick?.invoke(expenseList[position])
     }
 }

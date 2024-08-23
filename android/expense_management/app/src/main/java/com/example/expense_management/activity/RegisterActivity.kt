@@ -31,7 +31,7 @@ class RegisterActivity : AppCompatActivity() {
                     auth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener { task ->
                             if (task.isSuccessful) {
-                                Toast.makeText(this, "Creat account Successful", Toast.LENGTH_LONG)
+                                Toast.makeText(this, "Create account Successful", Toast.LENGTH_LONG)
                                     .show()
                                 //task.result.user?.uid
                                 val newUser = User(
@@ -63,22 +63,6 @@ class RegisterActivity : AppCompatActivity() {
                         }
                 }
             }
-//            auth.currentUser.let { user ->
-//                val newUser = User(
-//                    name = binding.username.text.toString()
-//                )
-//                if (user != null) {
-//                    db.collection("users")
-//                        .document(user.uid)
-//                        .set(newUser)
-//                        .addOnSuccessListener {
-//                            Toast.makeText(this, "Successful", Toast.LENGTH_LONG).show()
-//                        }
-//                        .addOnFailureListener { exception ->
-//                            Toast.makeText(this, exception.message, Toast.LENGTH_LONG).show()
-//                        }
-//                }
-//            }
         }
     }
 }

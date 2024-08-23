@@ -6,18 +6,19 @@ import android.widget.DatePicker
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
+import java.util.Locale
 
 class DateUtils(private val context: Context) {
     private var currentDate: Date = Date()
-    private val formatDate = SimpleDateFormat("dd/MM/yyyy")
+    private val formatDate = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
     fun getCurrentDate(): String {
         return formatDate.format(currentDate)
     }
     fun getPreDate(): String {
-        val calendarpreDate = Calendar.getInstance()
-        calendarpreDate.time = currentDate
-        calendarpreDate.add(Calendar.DAY_OF_YEAR, -1)
-        val preDate = calendarpreDate.time
+        val calendarPreDate = Calendar.getInstance()
+        calendarPreDate.time = currentDate
+        calendarPreDate.add(Calendar.DAY_OF_YEAR, -1)
+        val preDate = calendarPreDate.time
         return formatDate.format(preDate)
     }
 

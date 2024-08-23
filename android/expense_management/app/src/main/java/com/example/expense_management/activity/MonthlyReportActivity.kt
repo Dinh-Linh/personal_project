@@ -225,7 +225,7 @@ class MonthlyReportActivity : AppCompatActivity() {
     }
 
     //Total money func
-    fun totalPriceRevenue(
+    private fun totalPriceRevenue(
         vlue: String,
         startDate: Timestamp,
         endDate: Timestamp,

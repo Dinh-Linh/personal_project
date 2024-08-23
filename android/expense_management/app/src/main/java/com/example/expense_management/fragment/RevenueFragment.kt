@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.example.expense_management.R
 import com.example.expense_management.data.Revenue
 import com.example.expense_management.databinding.FragmentRevenueBinding
 import com.example.expense_management.func.ConvertToTimestamp
@@ -40,29 +41,28 @@ class RevenueFragment : Fragment() {
             }
         }
 
-        //tiền lương
-        bindingFm.salary.setOnClickListener {
-            bindingFm.category.text = "Tiền lương"
-        }
-        //tiền phụ cấp
-        bindingFm.allowance.setOnClickListener {
-            bindingFm.category.text = "Tiền phụ cấp"
-        }
-        //tiền thưởng
-        bindingFm.bonus.setOnClickListener {
-            bindingFm.category.text = "Tiền thưởng"
-        }
-        //thu nhập phụ
-        bindingFm.secondIncome.setOnClickListener {
-            bindingFm.category.text = "Thu nhập phụ"
-        }
-        //Đầu tư
-        bindingFm.invest.setOnClickListener {
-            bindingFm.category.text = "Đầu tư"
-        }
-        //Thu nhập tạm
-        bindingFm.tempIncome.setOnClickListener {
-            bindingFm.category.text = "Thu nhập tạm"
+        val buttons = listOf(
+            bindingFm.salary,
+            bindingFm.allowance,
+            bindingFm.bonus,
+            bindingFm.secondIncome,
+            bindingFm.invest,
+            bindingFm.tempIncome
+        )
+
+        buttons.forEach{button ->
+            button.setOnClickListener {
+                val categoryText = when(it.id){
+                    R.id.salary -> "Tiền lương"
+                    R.id.allowance -> "Tiền phụ cấp"
+                    R.id.bonus -> "Tiền thưởng"
+                    R.id.secondIncome -> "Thu nhập phụ"
+                    R.id.invest -> "Đầu tư"
+                    R.id.tempIncome -> "Thu nhập tạm"
+                    else -> ""
+                }
+                bindingFm.category.text = categoryText
+            }
         }
 
         bindingFm.addRevenue.setOnClickListener{
