@@ -1,10 +1,12 @@
 package com.example.expense_management_mvvm.source.network
 
+import android.content.res.Resources.NotFoundException
 import com.example.expense_management_mvvm.data.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.toObject
+import kotlinx.coroutines.Job
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
@@ -56,23 +58,25 @@ class FirebaseService {
         }
     }
 
-    suspend fun getUser(userId: String): User? {
-        return suspendCoroutine { continuation ->
-            auth.currentUser?.let {
-                db.collection("user").document(userId).get().addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        val document = task.result
+    val getUserJob: Job? = null
+
+    suspend fun getUser(userId: String): User {
+        val result =
+            suspendCoroutine { continuation ->
+                auth.currentUser?.let {
+                    db.collection("user").document(userId).get().addOnSuccessListener { document ->
                         if (document != null && document.exists()) {
-                            val username = document.toObject<User>()
+                            val username = User(document.data?.get("username").toString())
                             continuation.resume(username)
                         }
+                        else{
+                            continuation.resumeWithException(NotFoundException())
+                        }
+                    }.addOnFailureListener { exception ->
+                       continuation.resumeWithException(exception)
                     }
-                }.addOnFailureListener { exception ->
-                    exception.message
                 }
             }
-        }
+        return result
     }
-
-
 }

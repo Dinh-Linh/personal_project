@@ -19,14 +19,17 @@ class AuthRepository(private val firebaseService: FirebaseService) : BaseReposit
     }
 
     suspend fun login(email: String, password: String): DataState<FirebaseUser?> {
-        return getResults {
+        val result = getResults {
             firebaseService.login(email, password)
         }
+        return result
     }
 
     suspend fun getUser(userId: String): DataState<User?> {
-        return getResults {
+        val result =
+         getResults {
             firebaseService.getUser(userId)
         }
+        return result
     }
 }

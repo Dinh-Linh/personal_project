@@ -44,10 +44,10 @@ class AuthViewModel : BaseViewModel() {
         )
     }
 
-    fun getUser(useId:String) {
+    fun getUser(userId:String) {
         executeTask(
             request = {
-                authRepository.getUser(useId)
+                authRepository.getUser(userId)
             },
             onSuccess = {username ->
                 _username.value = username
