@@ -26,10 +26,14 @@ class AuthRepository(private val firebaseService: FirebaseService) : BaseReposit
     }
 
     suspend fun getUser(userId: String): DataState<User?> {
-        val result =
-         getResults {
+        return getResults {
             firebaseService.getUser(userId)
         }
-        return result
+    }
+
+    suspend fun logout() : DataState<Unit>{
+        return getResults {
+            firebaseService.logout()
+        }
     }
 }

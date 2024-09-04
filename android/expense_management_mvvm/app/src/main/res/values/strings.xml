@@ -3,4 +3,21 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="note">Note</string>
+    <string name="eat">Ăn uống</string>
+    <string name="shopping">Chi tiêu hàng</string>
+    <string name="clothes">Quần áo</string>
+    <string name="friendship">Phí giao lưu</string>
+    <string name="health">Sức khoẻ</string>
+    <string name="study">Học tập</string>
+    <string name="travel">Đi lại</string>
+    <string name="phoning">Liên lạc</string>
+    <string name="house">Nhà cửa</string>
+
+<!--    revenue-->
+    <string name="money_lv1">Tiền lương</string>
+    <string name="money_lv2">Tiền phụ cấp</string>
+    <string name="bonus">Tiền thưởng</string>
+    <string name="money_lv3">Thu nhập phụ</string>
+    <string name="invest">Đầu tư</string>
+    <string name="money_temp">Thu nhập tạm</string>
 </resources>

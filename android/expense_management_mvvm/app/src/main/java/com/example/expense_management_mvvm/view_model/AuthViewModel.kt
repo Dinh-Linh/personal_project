@@ -1,6 +1,7 @@
 package com.example.expense_management_mvvm.view_model
 
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.expense_management_mvvm.base.BaseViewModel
@@ -54,6 +55,20 @@ class AuthViewModel : BaseViewModel() {
             },
             onError = {exception ->
                 Log.e("AuthViewModel", "Error fetching username: ${exception.message}")
+
+            }
+        )
+    }
+
+    fun logout(){
+        executeTask(
+            request = {
+                authRepository.logout()
+            },
+            onSuccess = {
+
+            },
+            onError = {
 
             }
         )

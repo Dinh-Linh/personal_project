@@ -58,15 +58,13 @@ class FirebaseService {
         }
     }
 
-    val getUserJob: Job? = null
-
-    suspend fun getUser(userId: String): User {
+    suspend fun getUser(userId: String): User? {
         val result =
             suspendCoroutine { continuation ->
                 auth.currentUser?.let {
                     db.collection("user").document(userId).get().addOnSuccessListener { document ->
                         if (document != null && document.exists()) {
-                            val username = User(document.data?.get("username").toString())
+                            val username = document.toObject<User>()
                             continuation.resume(username)
                         }
                         else{
@@ -78,5 +76,11 @@ class FirebaseService {
                 }
             }
         return result
+    }
+
+    suspend fun logout(){
+        return suspendCoroutine {
+            auth.signOut()
+        }
     }
 }
