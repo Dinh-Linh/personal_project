@@ -23,7 +23,7 @@ class AuthViewModel : BaseViewModel() {
             request = { authRepository.login(email, password) },
             onSuccess = {user ->
                 _user.value = user
-                user?.uid?.let { getUser(it) }
+                //user?.uid?.let { getUser(it) }
             },
             onError = { exception ->
                 exception.message

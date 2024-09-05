@@ -31,6 +31,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#B5D98B"
+                android:clickable="true"
+                android:focusable="true"
                 android:fontFamily="@font/poppins_bold"
                 android:gravity="center"
                 android:padding="10dp"
@@ -87,7 +89,7 @@
             app:cardCornerRadius="10dp">
 
             <EditText
-                android:id="@+id/tienChi"
+                android:id="@+id/money"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#B5D98B"
@@ -289,5 +291,15 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/addRevenue"
+        style="@style/font_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@drawable/category_bg"
+        android:text="Thêm vào danh sách"
+        android:textAllCaps="false" />
 
 </LinearLayout>

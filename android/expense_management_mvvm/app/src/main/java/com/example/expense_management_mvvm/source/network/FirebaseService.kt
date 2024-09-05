@@ -1,7 +1,11 @@
 package com.example.expense_management_mvvm.source.network
 
 import android.content.res.Resources.NotFoundException
+import android.util.Log
+import android.widget.Toast
+import com.example.expense_management_mvvm.data.ExpenseManagement
 import com.example.expense_management_mvvm.data.User
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
@@ -63,24 +67,45 @@ class FirebaseService {
             suspendCoroutine { continuation ->
                 auth.currentUser?.let {
                     db.collection("user").document(userId).get().addOnSuccessListener { document ->
-                        if (document != null && document.exists()) {
-                            val username = document.toObject<User>()
+                        if (document != null) {
+                            val username = document.toObject(User::class.java)
                             continuation.resume(username)
-                        }
-                        else{
+                        } else {
                             continuation.resumeWithException(NotFoundException())
                         }
                     }.addOnFailureListener { exception ->
-                       continuation.resumeWithException(exception)
+                        continuation.resumeWithException(exception)
                     }
                 }
             }
         return result
     }
 
-    suspend fun logout(){
+    suspend fun logout() {
         return suspendCoroutine {
             auth.signOut()
+        }
+    }
+
+    suspend fun addExpense(userId: String, title:String, date:Timestamp, details:String, price:Double, type:String) {
+        return suspendCoroutine { continuation ->
+            auth.currentUser?.let {
+                val newExpense = ExpenseManagement(
+                    title = title,
+                    date = date,
+                    details = details,
+                    price = price,
+                    type = type
+                )
+                db.collection("expense_management").document().set(newExpense)
+                    .addOnSuccessListener {
+                        continuation.resumeWith(Result.success(Unit))
+                    }
+                    .addOnFailureListener {exception ->
+                        Log.e("FirebaseService", "Failed to add expense: ${exception.message}")
+                        continuation.resumeWith(Result.failure(exception))
+                    }
+            }
         }
     }
 }

@@ -13,11 +13,16 @@
     <string name="phoning">Liên lạc</string>
     <string name="house">Nhà cửa</string>
 
-<!--    revenue-->
+    <!--    revenue-->
     <string name="money_lv1">Tiền lương</string>
     <string name="money_lv2">Tiền phụ cấp</string>
     <string name="bonus">Tiền thưởng</string>
     <string name="money_lv3">Thu nhập phụ</string>
     <string name="invest">Đầu tư</string>
     <string name="money_temp">Thu nhập tạm</string>
+
+    <string name="add_successfully">Thêm thành công</string>
+    <string name="add_failure">Thêm thất bại</string>
+
+    <string name="add_full_field">Vui lòng nhập đầy đủ thông tin</string>
 </resources>

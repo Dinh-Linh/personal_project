@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.expense_management_mvvm.R
 import com.example.expense_management_mvvm.activity.RefreshActivity
 import com.example.expense_management_mvvm.base.BaseFragment
@@ -49,10 +50,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 ex.message
             }
         }
+
     }
 
     override fun observerData() {
-
+//        val username = auth.currentUser?.uid?.let { viewModel.getUser(it) }
+//        viewModel.username.observe(viewLifecycleOwner) {
+//            binding.username.text = username.toString()
+//        }
     }
 
     @SuppressLint("CommitTransaction", "SetTextI18n")
@@ -77,6 +82,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             viewModel.logout()
             startActivity(Intent(requireActivity(), RefreshActivity::class.java))
             requireActivity().finish()
+        }
+
+        binding.details.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_detailsFragment)
         }
     }
 
