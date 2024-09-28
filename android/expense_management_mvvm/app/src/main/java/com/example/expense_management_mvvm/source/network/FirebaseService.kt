@@ -11,6 +11,8 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.toObject
 import kotlinx.coroutines.Job
+import java.time.Month
+import java.util.Calendar
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
@@ -87,7 +89,14 @@ class FirebaseService {
         }
     }
 
-    suspend fun addExpense(userId: String, title:String, date:Timestamp, details:String, price:Double, type:String) {
+    suspend fun addExpense(
+        userId: String,
+        title: String,
+        date: Timestamp,
+        details: String,
+        price: Double,
+        type: String
+    ) {
         return suspendCoroutine { continuation ->
             auth.currentUser?.let {
                 val newExpense = ExpenseManagement(
@@ -101,8 +110,45 @@ class FirebaseService {
                     .addOnSuccessListener {
                         continuation.resumeWith(Result.success(Unit))
                     }
-                    .addOnFailureListener {exception ->
+                    .addOnFailureListener { exception ->
                         Log.e("FirebaseService", "Failed to add expense: ${exception.message}")
+                        continuation.resumeWith(Result.failure(exception))
+                    }
+            }
+        }
+    }
+
+    suspend fun getAllItem(
+        title: String,
+        month: Timestamp
+    ): List<ExpenseManagement> {
+        return suspendCoroutine { continuation ->
+            val calendar = Calendar.getInstance()
+            calendar.time = month.toDate()
+
+            //Set current month
+            calendar.set(Calendar.DAY_OF_MONTH, 1)
+            val startOfMonth = Timestamp(calendar.time)
+
+            //Add next month
+            calendar.add(Calendar.MONTH, 1)
+            val startOfNextMonth = Timestamp(calendar.time)
+
+            auth.currentUser?.let {
+                //Log.d("Query Params", "Title: $title, Start: $startOfMonth, End: $startOfNextMonth")
+                Log.d("Query Params", "Title: $title, Start: ${startOfMonth.toDate()}, End: ${startOfNextMonth.toDate()}")
+                db.collection("expense_management")
+                    .whereEqualTo("title", title)
+                    .whereGreaterThan("date", startOfMonth)
+                    .whereLessThan("date", startOfNextMonth)
+                    .get()
+                    .addOnSuccessListener { querySnapshot ->
+                        val listItem = querySnapshot.documents.mapNotNull { doc ->
+                            doc.toObject(ExpenseManagement::class.java)
+                        }
+                        continuation.resumeWith(Result.success(listItem))
+                    }
+                    .addOnFailureListener { exception ->
                         continuation.resumeWith(Result.failure(exception))
                     }
             }

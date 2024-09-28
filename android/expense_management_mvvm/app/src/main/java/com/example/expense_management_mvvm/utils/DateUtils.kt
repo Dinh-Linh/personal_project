@@ -32,6 +32,11 @@ open class DateUtils(private val context: Context) {
         return timestamp?.let { Timestamp(it) }
     }
 
+    fun convertMonthToTimestamp(monthString: String) : Timestamp? {
+        val date : Date? = monthFormat.parse(monthString)
+        return date?.let { Timestamp(it) }
+    }
+
     fun prevDate(): String {
         currentDate.add(Calendar.DAY_OF_YEAR, -1)
         date = currentDate.time
